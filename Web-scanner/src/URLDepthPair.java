@@ -1,27 +1,28 @@
 public class URLDepthPair {
-    private String url;
-    private int depth;
+    private String URL;
+    private int sh;
     private int visited;
-// конструктор
-    public URLDepthPair(String url_, int depth_) {
-        url = url_;
-        depth = depth_;
+    public URLDepthPair(String sslk_, int shirina_) {
+        URL = sslk_;
+        sh = shirina_;
         visited = 1;
     }
-// возвращает УРАЛ М7
+// возвращает ссылку
     public String getURL() {
-        return url;
+
+        return URL;
     }
-// возврщает ширину
+// возврщает глубину проверки
     public int getDepth() {
-        return depth;
+
+        return sh;
     }
-// увеличивает счетчик ссылок
+// увеличивает счетчик посещенных  ссылок
     public void incrementVisited() {
+
         visited++;
     }
-// выводит
     public String toString() {
-        return "<URL href=\"" + url + "\" visited=\"" + visited + "\" depth=\"" + depth + "\" \\>";
+        return "<URL href=\"" + URL + "\" visited=\"" + visited + "\" depth=\"" + sh + "\" \\>";
     }
 }

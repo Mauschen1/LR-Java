@@ -1,8 +1,7 @@
-import java.io.*;
-import java.net.*;
-import java.util.*;
-import java.util.regex.*;
-// это класс
+import java.io.*; // реализация потоков
+import java.net.*; // пакет для сокетов
+import java.util.*; // пакет для списков
+import java.util.regex.*; // для регулярных выражений
 public class Crawler {
 
     private HashMap<String, URLDepthPair> links = new HashMap<>();
@@ -25,12 +24,12 @@ public class Crawler {
         System.out.println();
         System.out.printf("Found %d URLS\n", links.size());
     }
-// регулярное выражение статическое
+// регулярное выражение
     public static Pattern LINK_REGEX = Pattern.compile(
             "<a\\s+(?:[^>]*?\\s+)?href=([\"'])(.*?)\\1"
     );
-// НЕрегулярное выражение, поиск, а нет, типа заходишь по сслыке данной, проверяешь там ссылки другие (проверка на наличие дерева ссылок)
-    // вырезается текущая ссылка и рассматривается следующая. прошлая ссылка уходит добавляется в список
+// НЕрегулярное выражение, проверка на наличие дерева ссылок
+    // вырезается текущая ссылка и рассматривается следующая. прошлая ссылка уходит, добавляется в список
     private void parseLink(URLDepthPair link) {
         if (links.containsKey(link.getURL())) {
             URLDepthPair knownLink = links.get(link.getURL());
@@ -42,7 +41,7 @@ public class Crawler {
 
         if (link.getDepth() >= depth)
             return;
-// добавление новой УРЛ
+// добавление новой ссылки
         try {
             URL url = new URL(link.getURL());
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
@@ -60,7 +59,7 @@ public class Crawler {
             }
         } catch (Exception e) {}
     }
-// выводит помощь
+// выводит помощь (Шаблон на случай, если пользователь забыл ввести ссылку или ширину или ввел их неправильно)
     public static void showHelp() {
         System.out.println("usage: java Crawler <URL> <depth>");
         System.exit(1);
